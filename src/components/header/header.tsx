@@ -5,13 +5,13 @@ import { identifo } from '../../services/identifo';
 const Header: FC = React.memo(() => {
     const { state } = useContext(AppContext)
     const login = () => {
-        identifo.signIn()
+        identifo.signin()
     }
     const signUp = () => {
-        identifo.signUp()
+        identifo.signup()
     }
     const logout = () => {
-        identifo.logOut()
+        identifo.logout()
     }
 
     return (

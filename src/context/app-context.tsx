@@ -18,7 +18,6 @@ const reducer = (state: InitialState, action: ActionType): InitialState => {
 
 const actions = {
     setIsAuth: (dispatch: any) => (status: boolean): void => {
-        console.log(status);
         dispatch({ type: 'SET_IS_AUTHENTICATED', payload: { status } })
     },
 };

@@ -1,10 +1,17 @@
-import { FC, useContext } from "react";
+import { FC, useContext, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { Context as AppContext } from '../context/app-context';
+import { identifo } from "../services/identifo";
 
 const Callback: FC = () => {
-    const { state } = useContext(AppContext)
-
+    const { state, actions } = useContext(AppContext)
+    useEffect(() => {
+        (async function () {
+            identifo.init()
+            await identifo.handleAuthentication()
+            actions.setIsAuth(identifo.isAuth);
+        })()
+    }, [actions])
     if (state.isAuthenticated) {
         return <Redirect to='/demo' />
     }

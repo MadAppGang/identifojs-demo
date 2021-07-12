@@ -8,27 +8,18 @@ import { identifo } from "../../services/identifo";
 const Demo: FC = () => {
     const [result, setResult] = useState<any>(null);
     const { state } = useContext(AppContext)
-
     const renewSession = () => {
         identifo.renewSession()
-            .then((t) => getToken())
+            .then((t) => console.log(t))
             .catch((e) => console.log(e))
     }
 
-    const getToken = async () => {
-        try {
-            const token = await identifo.getToken();
-            setResult(JSON.stringify(token, undefined, 4));
-        } catch (err) {
-            console.log(err.message);
-        }
+    const getToken = () => {
+        const token = identifo.getToken();
+        setResult(JSON.stringify(token, undefined, 4));
     }
     const getAuth = () => {
-        identifo.getAuthenticated()
-            .then((isAuth) => {
-                const json = {isAuth}
-                setResult(JSON.stringify(json))
-            })
+        setResult(JSON.stringify(identifo.isAuth, undefined, 4));
     }
 
     if (!state.isAuthenticated) return <Redirect to='/' />

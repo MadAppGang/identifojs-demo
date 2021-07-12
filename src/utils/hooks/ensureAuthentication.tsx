@@ -6,10 +6,11 @@ export const useEnsureAuthentication = () => {
     const { actions } = useContext(AppContext)
 
     useEffect(() => {
-        (async function () {
-            await identifo.handleAuthentication();
-            const status = await identifo.getAuthenticated();
-            actions.setIsAuth(status);
-        })()
+        identifo.init();
+    }, []);
+
+    useEffect(() => {
+        const status = identifo.isAuth;
+        actions.setIsAuth(status);
     }, [actions]);
 }
